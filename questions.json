@@ -133,5 +133,20 @@
     "generated_by": "Haiku 4.5",
     "id": 9,
     "created_at": "2025-10-16T15:09:58.893473"
+  },
+  {
+    "question": "A defendant is arrested without a warrant based on probable cause for a felony. During a lawful custodial interrogation at the police station, the defendant invokes his right to counsel. The police immediately cease questioning. Two hours later, the defendant approaches an officer and initiates conversation about the crime, stating he wants to talk. The officer, without re-reading Miranda rights or obtaining a waiver, listens as the defendant makes incriminating statements. Which of the following best describes the admissibility of these statements?",
+    "options": [
+      "A) The statements are inadmissible because the defendant's initial invocation of the right to counsel creates an absolute bar to any further questioning, and the defendant's re-initiation does not override this protection.",
+      "B) The statements are admissible because the defendant re-initiated contact with police, which constitutes a valid waiver of his Miranda rights and his right to counsel without the need for explicit re-advisement or written waiver.",
+      "C) The statements are admissible only if the police can demonstrate that the defendant was re-advised of his Miranda rights and that he knowingly and voluntarily waived both his Miranda rights and his right to counsel before providing the statements.",
+      "D) The statements are inadmissible because once a defendant invokes the right to counsel, all subsequent statements are presumptively involuntary regardless of who initiates the conversation, absent a continuance of at least 24 hours."
+    ],
+    "correct_answer": "C",
+    "reasoning": "This question tests understanding of the intersection between Miranda protections and Sixth Amendment right-to-counsel doctrines under Edwards v. Arizona and its progeny. The correct answer is C. When a defendant invokes the right to counsel during custodial interrogation, the police must cease questioning (Edwards rule). However, if the defendant later re-initiates contact, the Supreme Court has held that statements may be admissible if the police can demonstrate proper re-advisement of Miranda rights and a knowing and voluntary waiver. The defendant's re-initiation breaks the Edwards barrier, but this does not automatically waive the defendant's rights\u2014rather, it allows questioning to resume only if proper procedural safeguards are followed. Answer A is incorrect because while the Edwards rule initially bars police-initiated questioning, it does not create an absolute, permanent bar if the defendant re-initiates. Answer B is incorrect because re-initiation alone does not constitute a valid waiver; the Supreme Court requires that rights be re-advised and that the waiver be knowing and voluntary, typically documented. Answer D is incorrect because there is no 24-hour requirement in the law, and the rule is not that all subsequent statements are presumptively involuntary\u2014rather, statements after re-initiation can be admissible if proper procedures are followed. The key distinction is that re-initiation removes the Edwards bar but does not eliminate the requirement for proper re-advisement and waiver.",
+    "topic": "Criminal Procedure",
+    "generated_by": "Haiku 4.5",
+    "id": 10,
+    "created_at": "2025-10-16T16:09:33.960692"
   }
 ]

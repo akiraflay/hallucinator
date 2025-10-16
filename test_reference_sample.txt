@@ -1,0 +1,25 @@
+Sample MCQ Questions for Testing
+
+1. Under the Fourth Amendment, which of the following scenarios would most likely require a warrant?
+A) A police officer stops a vehicle for a broken taillight and observes drugs in plain view
+B) A police officer enters a home to conduct a search after receiving consent from a teenage occupant
+C) A police officer searches a vehicle after arresting the driver for DUI
+D) A police officer seizes contraband that falls out of a suspect's pocket during a pat-down
+
+Correct Answer: B
+
+2. In a criminal trial, which statement about hearsay exceptions is correct?
+A) Excited utterances must be made within 24 hours of the startling event
+B) Present sense impressions can only be made by the person experiencing the event
+C) Dying declarations are admissible in any type of criminal case
+D) Statements made for medical diagnosis or treatment are admissible even if made to family members
+
+Correct Answer: B
+
+3. An attorney learns that their client intends to commit perjury in an upcoming trial. Under Model Rule 3.3, what is the attorney's obligation?
+A) Withdraw from representation immediately without explanation
+B) Attempt to dissuade the client, and if unsuccessful, potentially disclose to the tribunal
+C) Maintain confidentiality regardless of the perjury
+D) Inform the prosecutor before addressing the issue with the client
+
+Correct Answer: B

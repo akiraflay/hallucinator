@@ -12,6 +12,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import time
 import html
+import prompts
 
 # Load environment variables - force reload and show status
 load_dotenv(override=True)
@@ -460,6 +461,106 @@ def load_custom_css():
         .stat-skipped {
             color: #FF8888;
         }
+
+        /* Reference card styling */
+        .reference-card {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(123, 47, 255, 0.1) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.15);
+        }
+
+        .reference-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .reference-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #00D9FF;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reference-count-badge {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.3) 0%, rgba(123, 47, 255, 0.3) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.5);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #00D9FF;
+        }
+
+        .reference-preview {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #CCC;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .reference-preview::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .reference-preview::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .reference-preview::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #00D9FF 0%, #7B2FFF 100%);
+            border-radius: 3px;
+        }
+
+        /* Clear reference button styling */
+        .clear-reference-button>button {
+            background: rgba(255, 100, 100, 0.1) !important;
+            border: 1px solid rgba(255, 100, 100, 0.3) !important;
+            color: #FF8888 !important;
+            padding: 0.4rem 0.8rem !important;
+            border-radius: 6px !important;
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+        }
+
+        .clear-reference-button>button:hover {
+            background: rgba(255, 100, 100, 0.2) !important;
+            border-color: rgba(255, 100, 100, 0.5) !important;
+        }
+
+        /* Add reference button in controls */
+        .add-reference-button {
+            margin-top: 1.88rem;
+        }
+
+        .add-reference-button>button {
+            background-color: #1E2130 !important;
+            border: none !important;
+            color: #AAAAAA !important;
+            font-weight: 500 !important;
+            padding: 0.46rem 0.6rem !important;
+            border-radius: 8px !important;
+            font-size: 0.875rem !important;
+        }
+
+        .add-reference-button>button:hover {
+            background-color: #252838 !important;
+            color: #CCCCCC !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -527,29 +628,67 @@ def save_results(results):
     with open(RESULTS_FILE, 'w') as f:
         json.dump(results, f, indent=2)
 
+# Reference extraction function
+def extract_reference_questions(client, reference_text):
+    """
+    Extract MCQ questions from unstructured text using Claude Haiku 4.5
+
+    Args:
+        client: OpenRouter client
+        reference_text: Unstructured text containing MCQ questions
+
+    Returns:
+        Dictionary with extracted questions or error
+    """
+    try:
+        prompt = prompts.get_reference_extraction_prompt(reference_text)
+
+        print(f"[DEBUG] Extracting reference questions using Haiku 4.5")
+        response = client.chat.completions.create(
+            model="anthropic/claude-haiku-4.5",
+            messages=[
+                {"role": "system", "content": "You are an expert at analyzing and extracting multiple-choice questions from text."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3
+        )
+
+        response_text = response.choices[0].message.content.strip()
+
+        # Strip markdown code fences if present
+        json_text = re.sub(r'^```json\s*', '', response_text)
+        json_text = re.sub(r'\s*```$', '', json_text)
+
+        print(f"[DEBUG] Parsing extracted reference data")
+        extracted_data = json.loads(json_text)
+        print(f"[DEBUG] Successfully extracted {extracted_data.get('count', 0)} questions")
+
+        return extracted_data
+
+    except json.JSONDecodeError as e:
+        print(f"[DEBUG] JSON parsing failed: {str(e)}")
+        return {"count": 0, "questions": [], "error": f"Failed to parse extraction results: {str(e)}"}
+    except Exception as e:
+        print(f"[DEBUG] Extraction error: {str(e)}")
+        return {"count": 0, "questions": [], "error": f"Extraction failed: {str(e)}"}
+
 # Question generation function with streaming
-def generate_question_stream(client, topic, model):
-    """Generate a legal question using OpenRouter API with streaming"""
+def generate_question_stream(client, topic, model, reference_data=None):
+    """
+    Generate a legal question using OpenRouter API with streaming
 
-    prompt = f"""Generate a legal multiple-choice question on the topic of {topic}.
+    Args:
+        client: OpenRouter client
+        topic: Legal topic for the question
+        model: Model name to use
+        reference_data: Optional reference questions data to match style/difficulty
 
-Requirements:
-- Create a moderately difficult to difficult question (no easy questions)
-- Focus on federal law and broadly applicable legal principles relevant to public defenders
-- Provide exactly 4 answer options labeled A, B, C, D
-- Make the wrong answers adversarial - they should be plausible and require legal reasoning to rule out
-- One answer must be clearly correct
-- Include a detailed reasoning trace explaining why the correct answer is right and why the wrong answers are incorrect
+    Returns:
+        Generator yielding chunks of text or parsed data
+    """
 
-Output format (valid JSON only):
-{{
-    "question": "The question text here",
-    "options": ["A) First option", "B) Second option", "C) Third option", "D) Fourth option"],
-    "correct_answer": "C",
-    "reasoning": "Detailed explanation of why C is correct and why A, B, D are incorrect"
-}}
-
-Respond only with valid JSON, no additional text."""
+    # Get prompt from prompts module (with or without reference)
+    prompt = prompts.get_question_generation_prompt(topic, reference_data)
 
     try:
         print(f"[DEBUG] Attempting API call with model: {MODELS[model]}")
@@ -597,14 +736,10 @@ Respond only with valid JSON, no additional text."""
 def evaluate_question(client, question_data, model_name):
     """Evaluate a single question with a specific model"""
 
-    options_text = "\n".join(question_data['options'])
-    prompt = f"""Answer this multiple choice question. Respond with ONLY the letter (A, B, C, or D) of your answer, nothing else.
-
-Question: {question_data['question']}
-
-{options_text}
-
-Your answer (A, B, C, or D only):"""
+    prompt = prompts.get_evaluation_prompt(
+        question_data['question'],
+        question_data['options']
+    )
 
     try:
         response = client.chat.completions.create(
@@ -644,6 +779,101 @@ Your answer (A, B, C, or D only):"""
             "error": str(e)
         }
 
+# Dialog functions for reference management
+@st.dialog("Add Reference Questions", width="large")
+def show_add_reference_dialog(client):
+    """Dialog for adding reference questions"""
+    st.markdown("Paste unstructured text containing one or more multiple-choice questions:")
+
+    reference_text = st.text_area(
+        "Reference Text",
+        height=300,
+        placeholder="Paste your reference questions here...",
+        label_visibility="collapsed"
+    )
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Cancel", use_container_width=True):
+            st.rerun()
+
+    with col2:
+        if st.button("Confirm", use_container_width=True, type="primary"):
+            if not reference_text.strip():
+                st.error("Please enter some text to analyze.")
+                return
+
+            # Show loading spinner
+            with st.spinner("Analyzing reference questions..."):
+                extracted_data = extract_reference_questions(client, reference_text)
+
+            # Check for errors
+            if extracted_data.get('error'):
+                st.error(f"Error: {extracted_data['error']}")
+                return
+
+            # Check if any questions were found
+            if extracted_data.get('count', 0) == 0:
+                st.error("No multiple-choice questions detected in the provided text. Please check your input and try again.")
+                return
+
+            # Check for incomplete questions (missing correct answers)
+            incomplete_questions = [
+                q for q in extracted_data.get('questions', [])
+                if not q.get('has_answer', False)
+            ]
+
+            if incomplete_questions:
+                st.warning(f"Found {len(incomplete_questions)} question(s) without correct answers.")
+                st.markdown("**Please provide the correct answer for each incomplete question:**")
+
+                # Create input fields for missing answers
+                for idx, q in enumerate(incomplete_questions):
+                    st.markdown(f"**Question {idx + 1}:** {q.get('question', 'N/A')[:100]}...")
+                    correct_answer = st.selectbox(
+                        f"Correct Answer for Question {idx + 1}",
+                        options=["A", "B", "C", "D"],
+                        key=f"incomplete_answer_{idx}"
+                    )
+                    # Update the question with the provided answer
+                    q['correct_answer'] = correct_answer
+                    q['has_answer'] = True
+
+                if st.button("Save Reference with Answers", use_container_width=True, type="primary"):
+                    # Save reference data
+                    st.session_state.reference_data = extracted_data
+                    st.session_state.reference_active = True
+                    st.toast(f"✅ {extracted_data['count']} MCQ question(s) detected as reference", icon="🎯")
+                    st.rerun()
+            else:
+                # All questions have answers, save immediately
+                st.session_state.reference_data = extracted_data
+                st.session_state.reference_active = True
+                st.toast(f"✅ {extracted_data['count']} MCQ question(s) detected as reference", icon="🎯")
+                st.rerun()
+
+
+@st.dialog("Clear Reference", width="small")
+def show_clear_reference_dialog():
+    """Dialog for confirming reference clearance"""
+    st.markdown("Are you sure you want to clear the current reference questions?")
+    st.markdown("This action cannot be undone.")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Cancel", use_container_width=True):
+            st.rerun()
+
+    with col2:
+        if st.button("Clear", use_container_width=True, type="primary"):
+            st.session_state.reference_data = None
+            st.session_state.reference_active = False
+            st.toast("Reference cleared", icon="🗑️")
+            st.rerun()
+
+
 # Initialize session state
 def init_session_state():
     if 'generated_questions' not in st.session_state:
@@ -654,6 +884,11 @@ def init_session_state():
         st.session_state.workflow_state = "idle"  # "idle" | "generating" | "reviewing" | "complete"
     if 'evaluating' not in st.session_state:
         st.session_state.evaluating = False
+    # Reference-related state
+    if 'reference_data' not in st.session_state:
+        st.session_state.reference_data = None
+    if 'reference_active' not in st.session_state:
+        st.session_state.reference_active = False
 
 # Main app
 def main():
@@ -682,7 +917,7 @@ def main():
     with tab1:
         st.markdown("### 🎯 Generate Legal Questions")
 
-        col1, col2, col3 = st.columns([2, 2, 1])
+        col1, col2, col3, col4 = st.columns([2, 2, 1, 1.5])
 
         with col1:
             topic = st.selectbox("📚 Select Topic", TOPICS, key="gen_topic")
@@ -692,6 +927,65 @@ def main():
 
         with col3:
             quantity = st.number_input("📝 Quantity", min_value=1, max_value=20, value=5, key="gen_quantity")
+
+        with col4:
+            st.markdown('<div class="add-reference-button">', unsafe_allow_html=True)
+            if st.button("+ Reference(s)", use_container_width=True, key="add_ref_btn"):
+                show_add_reference_dialog(client)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # Display reference card if active
+        if st.session_state.reference_active and st.session_state.reference_data:
+            ref_data = st.session_state.reference_data
+            count = ref_data.get('count', 0)
+
+            # Build preview text
+            preview_lines = []
+            for idx, q in enumerate(ref_data.get('questions', [])[:3], 1):
+                preview_lines.append(f"{idx}. {q.get('question', 'N/A')[:80]}...")
+
+            preview_text = "\n".join(preview_lines)
+            if count > 3:
+                preview_text += f"\n... and {count - 3} more"
+
+            # Reference card HTML
+            st.markdown(f"""
+            <div class='reference-card'>
+                <div class='reference-header'>
+                    <div class='reference-title'>
+                        🎯 Reference Active
+                        <span class='reference-count-badge'>{count} Question{'' if count == 1 else 's'}</span>
+                    </div>
+                </div>
+                <div class='reference-preview'>{html.escape(preview_text)}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            # Show details in expander and clear button
+            col_exp, col_clear = st.columns([4, 1])
+
+            with col_exp:
+                with st.expander("📋 View Reference Details"):
+                    for idx, q in enumerate(ref_data.get('questions', []), 1):
+                        st.markdown(f"**Question {idx}:**")
+                        st.write(q.get('question', 'N/A'))
+                        st.markdown(f"**Correct Answer:** {q.get('correct_answer', 'N/A')}")
+                        if idx < len(ref_data.get('questions', [])):
+                            st.markdown("---")
+
+                    if ref_data.get('style_notes'):
+                        st.markdown("**Style Notes:**")
+                        st.write(ref_data['style_notes'])
+
+                    if ref_data.get('difficulty_notes'):
+                        st.markdown("**Difficulty:**")
+                        st.write(ref_data['difficulty_notes'])
+
+            with col_clear:
+                st.markdown('<div class="clear-reference-button">', unsafe_allow_html=True)
+                if st.button("🗑️ Clear", use_container_width=True, key="clear_ref_btn"):
+                    show_clear_reference_dialog()
+                st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -706,6 +1000,9 @@ def main():
             progress_bar = st.progress(0)
             status_text = st.empty()
 
+            # Get reference data if active
+            reference_data = st.session_state.reference_data if st.session_state.reference_active else None
+
             for i in range(quantity):
                 status_text.markdown(f"<div class='status-info'>🎯 Generating question {i+1} of {quantity}...</div>", unsafe_allow_html=True)
 
@@ -715,7 +1012,7 @@ def main():
                 full_text = ""
                 question_data = None
 
-                for chunk in generate_question_stream(client, topic, model):
+                for chunk in generate_question_stream(client, topic, model, reference_data):
                     if isinstance(chunk, dict):
                         if "parsed" in chunk:
                             question_data = chunk["parsed"]
