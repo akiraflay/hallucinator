@@ -143,23 +143,73 @@ def load_custom_css():
         /* Option boxes */
         .option-box {
             background: #1E2130;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-left: 3px solid #00D9FF;
-            transition: all 0.2s ease;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.75rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .option-box:hover {
             background: #252838;
-            border-left-color: #7B2FFF;
+            border-color: rgba(0, 217, 255, 0.3);
+            transform: translateX(4px);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #AAA;
+        }
+
+        .option-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #DDDDDD;
         }
 
         .correct-answer {
-            background: linear-gradient(90deg, rgba(0, 217, 100, 0.25) 0%, rgba(0, 217, 100, 0.15) 100%);
-            border-left: 5px solid #00D964;
-            font-weight: 600;
-            box-shadow: 0 0 15px rgba(0, 217, 100, 0.3);
+            background: linear-gradient(90deg, rgba(0, 217, 100, 0.2) 0%, rgba(0, 217, 100, 0.12) 100%);
+            border: 2px solid rgba(0, 217, 100, 0.5);
+            box-shadow: 0 0 20px rgba(0, 217, 100, 0.25);
+        }
+
+        .correct-answer .option-letter {
+            background: linear-gradient(135deg, #00D964 0%, #00B350 100%);
+            border-color: #00D964;
+            color: #FFFFFF;
+        }
+
+        .correct-answer .option-text {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        .correct-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.8rem;
+            background: rgba(0, 217, 100, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #00D964;
+            letter-spacing: 0.5px;
         }
 
         /* Progress bars */
@@ -287,36 +337,123 @@ def load_custom_css():
             background: linear-gradient(90deg, #00D9FF 30%, #7B2FFF 70%);
         }
 
-        /* Minimalist action buttons for question review */
+        /* Action buttons container */
+        .action-buttons-container {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Enhanced action buttons for question review */
         .review-button>button {
             background: rgba(255, 255, 255, 0.05) !important;
             color: #AAAAAA !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            padding: 0.6rem 1.5rem !important;
-            border-radius: 6px !important;
-            font-weight: 500 !important;
-            font-size: 0.9rem !important;
-            transition: all 0.2s ease !important;
+            border: 2px solid rgba(255, 255, 255, 0.12) !important;
+            padding: 0.85rem 1.8rem !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            font-size: 0.95rem !important;
+            transition: all 0.3s ease !important;
             box-shadow: none !important;
         }
 
         .review-button>button:hover {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
-            transform: none !important;
-            box-shadow: none !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         }
 
-        /* Primary action (Approve) gets subtle green accent */
+        /* Primary action (Approve) gets prominent green styling */
         .review-button-primary>button {
-            background: rgba(0, 217, 100, 0.1) !important;
-            border-color: rgba(0, 217, 100, 0.3) !important;
-            color: #00D964 !important;
+            background: linear-gradient(90deg, rgba(0, 217, 100, 0.2) 0%, rgba(0, 217, 100, 0.15) 100%) !important;
+            border: 2px solid rgba(0, 217, 100, 0.5) !important;
+            color: #00FF88 !important;
+            font-weight: 700 !important;
         }
 
         .review-button-primary>button:hover {
-            background: rgba(0, 217, 100, 0.15) !important;
-            border-color: rgba(0, 217, 100, 0.4) !important;
+            background: linear-gradient(90deg, rgba(0, 217, 100, 0.3) 0%, rgba(0, 217, 100, 0.2) 100%) !important;
+            border-color: rgba(0, 217, 100, 0.7) !important;
+            box-shadow: 0 4px 20px rgba(0, 217, 100, 0.4) !important;
+        }
+
+        /* Secondary destructive action */
+        .review-button-secondary>button {
+            background: rgba(255, 100, 100, 0.08) !important;
+            border-color: rgba(255, 100, 100, 0.3) !important;
+            color: #FF8888 !important;
+        }
+
+        .review-button-secondary>button:hover {
+            background: rgba(255, 100, 100, 0.15) !important;
+            border-color: rgba(255, 100, 100, 0.5) !important;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            margin-left: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #888;
+            font-family: monospace;
+        }
+
+        /* Progress badge in corner */
+        .progress-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(123, 47, 255, 0.2) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #00D9FF;
+        }
+
+        /* Review statistics */
+        .review-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .stat-approved {
+            color: #00D964;
+        }
+
+        .stat-skipped {
+            color: #FF8888;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -631,29 +768,79 @@ def main():
             q = st.session_state.generated_questions[idx]
 
             total = len(st.session_state.generated_questions)
-            st.markdown(f"### Question {idx + 1} of {total}")
+
+            # Initialize session state for tracking
+            if 'approved_count' not in st.session_state:
+                st.session_state.approved_count = 0
+            if 'skipped_count' not in st.session_state:
+                st.session_state.skipped_count = 0
+
+            # Statistics panel
+            st.markdown(f"""
+            <div class='review-stats'>
+                <div class='stat-item'>
+                    <span class='stat-label'>Progress</span>
+                    <span class='stat-value'>{idx + 1} / {total}</span>
+                </div>
+                <div class='stat-item'>
+                    <span class='stat-label'>Approved</span>
+                    <span class='stat-value stat-approved'>{st.session_state.approved_count}</span>
+                </div>
+                <div class='stat-item'>
+                    <span class='stat-label'>Skipped</span>
+                    <span class='stat-value stat-skipped'>{st.session_state.skipped_count}</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
             st.progress((idx + 1) / total)
 
             # Question card
-            st.markdown("<div class='question-card'>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class='question-card'>
+                <div class='progress-badge'>{idx + 1} of {total}</div>
 
-            st.markdown(f"**📝 {q.get('question', 'N/A')}**")
-            st.markdown("<br>", unsafe_allow_html=True)
+                <div class='question-metadata'>
+                    <span class='metadata-badge topic-badge'>📚 {q.get('topic', 'Unknown Topic')}</span>
+                    <span class='metadata-badge model-badge'>🤖 {q.get('generated_by', 'Unknown Model')}</span>
+                </div>
 
-            # Display options
+                <div class='question-text'>
+                    {q.get('question', 'N/A')}
+                </div>
+
+                <div class='options-header'>Answer Options</div>
+            """, unsafe_allow_html=True)
+
+            # Display options with enhanced styling
             for i, option in enumerate(q.get('options', [])):
-                letter = option[0] if option else "?"
+                # Extract letter (A, B, C, D)
+                letter = option[0] if option and len(option) > 0 else "?"
+                # Remove letter and parenthesis from text
+                option_text = option[3:].strip() if len(option) > 3 else option
                 is_correct = letter == q.get('correct_answer', '')
 
                 if is_correct:
-                    st.markdown(f"<div class='option-box correct-answer'><strong>✅ CORRECT ANSWER:</strong> {option}</div>", unsafe_allow_html=True)
+                    st.markdown(f"""
+                    <div class='option-box correct-answer'>
+                        <span class='option-letter'>{letter}</span>
+                        <span class='option-text'>{option_text}</span>
+                        <span class='correct-indicator'>✓ CORRECT</span>
+                    </div>
+                    """, unsafe_allow_html=True)
                 else:
-                    st.markdown(f"<div class='option-box'>{option}</div>", unsafe_allow_html=True)
+                    st.markdown(f"""
+                    <div class='option-box'>
+                        <span class='option-letter'>{letter}</span>
+                        <span class='option-text'>{option_text}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
 
             # Reasoning expander
             with st.expander("🧠 View Reasoning"):
                 st.write(q.get('reasoning', 'No reasoning provided'))
 
+            st.markdown("<div class='action-buttons-container'></div>", unsafe_allow_html=True)
             st.markdown("</div>", unsafe_allow_html=True)
 
             # Action buttons
