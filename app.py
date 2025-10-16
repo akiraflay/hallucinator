@@ -11,6 +11,7 @@ from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
 import time
+import html
 
 # Load environment variables - force reload and show status
 load_dotenv(override=True)
@@ -84,41 +85,42 @@ def load_custom_css():
         .question-card {
             background: linear-gradient(135deg, #1E2130 0%, #252838 100%);
             border-radius: 16px;
-            padding: 2.5rem;
-            margin: 2rem auto;
+            padding: 2rem;
+            margin: 1rem auto;
             max-width: 900px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 217, 255, 0.15);
             border: 1px solid rgba(0, 217, 255, 0.2);
             position: relative;
         }
 
-        /* Question metadata section */
+        /* Question metadata section - positioned next to "Answer Options" header */
         .question-metadata {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-left: auto;
         }
 
         .metadata-badge {
             display: inline-block;
-            padding: 0.4rem 0.9rem;
+            padding: 0.35rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.3px;
         }
 
         .topic-badge {
-            background: linear-gradient(90deg, rgba(0, 217, 255, 0.2) 0%, rgba(123, 47, 255, 0.2) 100%);
-            border: 1px solid rgba(0, 217, 255, 0.4);
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.15) 0%, rgba(123, 47, 255, 0.15) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.3);
             color: #00D9FF;
         }
 
         .model-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #AAAAAA;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #999;
+            font-size: 0.7rem;
         }
 
         /* Question text styling */
@@ -127,7 +129,7 @@ def load_custom_css():
             font-weight: 500;
             line-height: 1.7;
             color: #FFFFFF;
-            margin: 1.5rem 0 2rem 0;
+            margin: 0 0 1.5rem 0;
             padding: 0 0.5rem;
         }
 
@@ -138,6 +140,9 @@ def load_custom_css():
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         /* Option boxes */
@@ -403,11 +408,11 @@ def load_custom_css():
             font-family: monospace;
         }
 
-        /* Progress badge in corner */
+        /* Progress badge in top-left corner */
         .progress-badge {
             position: absolute;
             top: 1.5rem;
-            right: 1.5rem;
+            left: 1.5rem;
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(123, 47, 255, 0.2) 100%);
             border: 1px solid rgba(0, 217, 255, 0.4);
             padding: 0.5rem 1rem;
@@ -421,8 +426,8 @@ def load_custom_css():
         .review-stats {
             display: flex;
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -694,6 +699,8 @@ def main():
             st.session_state.generated_questions = []
             st.session_state.current_question_idx = 0
             st.session_state.workflow_state = "generating"
+            st.session_state.approved_count = 0
+            st.session_state.skipped_count = 0
 
             # Generate questions
             progress_bar = st.progress(0)
@@ -795,62 +802,41 @@ def main():
 
             st.progress((idx + 1) / total)
 
-            # Question card
-            st.markdown(f"""
-            <div class='question-card'>
-                <div class='progress-badge'>{idx + 1} of {total}</div>
-
-                <div class='question-metadata'>
-                    <span class='metadata-badge topic-badge'>📚 {q.get('topic', 'Unknown Topic')}</span>
-                    <span class='metadata-badge model-badge'>🤖 {q.get('generated_by', 'Unknown Model')}</span>
-                </div>
-
-                <div class='question-text'>
-                    {q.get('question', 'N/A')}
-                </div>
-
-                <div class='options-header'>Answer Options</div>
-            """, unsafe_allow_html=True)
-
-            # Display options with enhanced styling
+            # Build options HTML - no indentation to avoid markdown parsing issues
+            options_html = ""
             for i, option in enumerate(q.get('options', [])):
                 # Extract letter (A, B, C, D)
                 letter = option[0] if option and len(option) > 0 else "?"
                 # Remove letter and parenthesis from text
                 option_text = option[3:].strip() if len(option) > 3 else option
+                # Escape HTML in option text
+                option_text_escaped = html.escape(option_text)
                 is_correct = letter == q.get('correct_answer', '')
 
                 if is_correct:
-                    st.markdown(f"""
-                    <div class='option-box correct-answer'>
-                        <span class='option-letter'>{letter}</span>
-                        <span class='option-text'>{option_text}</span>
-                        <span class='correct-indicator'>✓ CORRECT</span>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    options_html += f"<div class='option-box correct-answer'><span class='option-letter'>{letter}</span><span class='option-text'>{option_text_escaped}</span><span class='correct-indicator'>✓ CORRECT</span></div>"
                 else:
-                    st.markdown(f"""
-                    <div class='option-box'>
-                        <span class='option-letter'>{letter}</span>
-                        <span class='option-text'>{option_text}</span>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    options_html += f"<div class='option-box'><span class='option-letter'>{letter}</span><span class='option-text'>{option_text_escaped}</span></div>"
+
+            # Question card - complete HTML block (no indentation in the HTML)
+            question_text = html.escape(q.get('question', 'N/A'))
+            card_html = f"<div class='question-card'><div class='question-text'>{question_text}</div><div class='options-header'><span>Answer Options</span><div class='question-metadata'><span class='metadata-badge topic-badge'>📚 {q.get('topic', 'Unknown Topic')}</span><span class='metadata-badge model-badge'>🤖 {q.get('generated_by', 'Unknown Model')}</span></div></div>{options_html}</div>"
+
+            st.markdown(card_html, unsafe_allow_html=True)
 
             # Reasoning expander
             with st.expander("🧠 View Reasoning"):
                 st.write(q.get('reasoning', 'No reasoning provided'))
 
-            st.markdown("<div class='action-buttons-container'></div>", unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
-
-            # Action buttons
-            col1, col2, col3, col4 = st.columns([2, 1, 1, 3])
+            # Action buttons with enhanced styling
+            col1, col2, col3, col4 = st.columns([2.5, 1.5, 1.5, 2])
 
             with col1:
                 st.markdown('<div class="review-button review-button-primary">', unsafe_allow_html=True)
-                if st.button("Approve & Save", use_container_width=True, key="approve_btn"):
+                if st.button("✓ Approve & Save", use_container_width=True, key="approve_btn"):
                     question_id = save_question(q)
-                    st.success(f"🎉 Question saved with ID #{question_id}")
+                    st.session_state.approved_count += 1
+                    st.toast(f"🎉 Question saved with ID #{question_id}", icon="✅")
                     st.session_state.current_question_idx += 1
                     # Mark as complete if this was the last question
                     if st.session_state.current_question_idx >= len(st.session_state.generated_questions):
@@ -859,8 +845,9 @@ def main():
                 st.markdown('</div>', unsafe_allow_html=True)
 
             with col2:
-                st.markdown('<div class="review-button">', unsafe_allow_html=True)
-                if st.button("Skip", use_container_width=True, key="skip_btn"):
+                st.markdown('<div class="review-button review-button-secondary">', unsafe_allow_html=True)
+                if st.button("⤭ Skip", use_container_width=True, key="skip_btn"):
+                    st.session_state.skipped_count += 1
                     st.session_state.current_question_idx += 1
                     # Mark as complete if this was the last question
                     if st.session_state.current_question_idx >= len(st.session_state.generated_questions):
@@ -871,17 +858,36 @@ def main():
             with col3:
                 if idx > 0:
                     st.markdown('<div class="review-button">', unsafe_allow_html=True)
-                    if st.button("Back", use_container_width=True, key="back_btn"):
+                    if st.button("← Back", use_container_width=True, key="back_btn"):
                         st.session_state.current_question_idx -= 1
                         st.rerun()
                     st.markdown('</div>', unsafe_allow_html=True)
 
+            # Keyboard shortcuts hint
+            st.markdown("""
+            <div style='text-align: center; margin-top: 1.5rem; color: #666; font-size: 0.85rem;'>
+                💡 <strong>Tip:</strong> Review each question carefully before approving
+            </div>
+            """, unsafe_allow_html=True)
+
         elif st.session_state.workflow_state == "complete":
-            st.markdown("<div class='status-success'>✨ All questions reviewed!</div>", unsafe_allow_html=True)
-            if st.button("🔄 Generate More"):
+            # Show completion summary
+            st.markdown(f"""
+            <div class='status-success' style='text-align: center; padding: 2rem;'>
+                <h2 style='margin: 0 0 1rem 0;'>✨ All Questions Reviewed!</h2>
+                <p style='font-size: 1.1rem; color: #AAA;'>
+                    Approved: <strong style='color: #00D964;'>{st.session_state.approved_count}</strong> |
+                    Skipped: <strong style='color: #FF8888;'>{st.session_state.skipped_count}</strong>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            if st.button("🔄 Generate More Questions", use_container_width=True):
                 st.session_state.generated_questions = []
                 st.session_state.current_question_idx = 0
                 st.session_state.workflow_state = "idle"
+                st.session_state.approved_count = 0
+                st.session_state.skipped_count = 0
                 st.rerun()
 
         else:
