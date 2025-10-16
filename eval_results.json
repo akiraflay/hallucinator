@@ -1,0 +1,100 @@
+[
+  {
+    "question_id": 1,
+    "model": "Sonnet 4.5",
+    "selected": "B",
+    "correct": false,
+    "timestamp": "2025-10-16T03:21:24.641988"
+  },
+  {
+    "question_id": 1,
+    "model": "Haiku 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:25.922635"
+  },
+  {
+    "question_id": 2,
+    "model": "Sonnet 4.5",
+    "selected": "B",
+    "correct": false,
+    "timestamp": "2025-10-16T03:21:27.158414"
+  },
+  {
+    "question_id": 2,
+    "model": "Haiku 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:27.633136"
+  },
+  {
+    "question_id": 3,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:29.060205"
+  },
+  {
+    "question_id": 3,
+    "model": "Haiku 4.5",
+    "selected": "B",
+    "correct": false,
+    "timestamp": "2025-10-16T03:21:29.533990"
+  },
+  {
+    "question_id": 4,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:30.928545"
+  },
+  {
+    "question_id": 4,
+    "model": "Haiku 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:31.428113"
+  },
+  {
+    "question_id": 5,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:32.581126"
+  },
+  {
+    "question_id": 5,
+    "model": "Haiku 4.5",
+    "selected": "D",
+    "correct": false,
+    "timestamp": "2025-10-16T03:21:33.055497"
+  },
+  {
+    "question_id": 6,
+    "model": "Sonnet 4.5",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:34.370469"
+  },
+  {
+    "question_id": 6,
+    "model": "Haiku 4.5",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:34.903148"
+  },
+  {
+    "question_id": 7,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:36.172193"
+  },
+  {
+    "question_id": 7,
+    "model": "Haiku 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-16T03:21:36.978595"
+  }
+]
