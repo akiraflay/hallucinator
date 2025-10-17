@@ -561,6 +561,135 @@ def load_custom_css():
             transform: none !important;
             box-shadow: none !important;
         }
+
+        /* Evaluation question card */
+        .eval-question-card {
+            background: linear-gradient(135deg, #1E2130 0%, #252838 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 217, 255, 0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .eval-question-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .eval-question-text {
+            flex: 1;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        .eval-question-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .correct-answer-badge {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            background: linear-gradient(90deg, rgba(0, 217, 100, 0.25) 0%, rgba(0, 217, 100, 0.15) 100%);
+            border: 1.5px solid rgba(0, 217, 100, 0.5);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #00D964;
+            white-space: nowrap;
+        }
+
+        .eval-topic-badge {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            background: rgba(0, 217, 255, 0.12);
+            border: 1px solid rgba(0, 217, 255, 0.25);
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #00D9FF;
+        }
+
+        .model-responses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.75rem;
+        }
+
+        .model-response-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.9rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .model-response-correct {
+            background: rgba(0, 217, 100, 0.15);
+            border-color: rgba(0, 217, 100, 0.3);
+            color: #00D964;
+        }
+
+        .model-response-incorrect {
+            background: rgba(255, 100, 100, 0.15);
+            border-color: rgba(255, 100, 100, 0.3);
+            color: #FF8888;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .difficulty-easy {
+            background: rgba(0, 217, 100, 0.2);
+            border: 1px solid rgba(0, 217, 100, 0.4);
+            color: #00D964;
+        }
+
+        .difficulty-medium {
+            background: rgba(255, 200, 0, 0.2);
+            border: 1px solid rgba(255, 200, 0, 0.4);
+            color: #FFC800;
+        }
+
+        .difficulty-hard {
+            background: rgba(255, 100, 100, 0.2);
+            border: 1px solid rgba(255, 100, 100, 0.4);
+            color: #FF6464;
+        }
+
+        /* Clear results button */
+        .clear-results-button>button {
+            background: rgba(255, 100, 100, 0.1) !important;
+            border: 2px solid rgba(255, 100, 100, 0.3) !important;
+            color: #FF8888 !important;
+            padding: 0.6rem 1.5rem !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+        }
+
+        .clear-results-button>button:hover {
+            background: rgba(255, 100, 100, 0.2) !important;
+            border-color: rgba(255, 100, 100, 0.5) !important;
+            transform: translateY(-1px) !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -1243,8 +1372,35 @@ def main():
                     total_evaluations = len(questions) * len(selected_models)
                     current_eval = 0
 
+                    # Container for question cards
+                    question_containers = {}
+
                     for q_idx, question in enumerate(questions):
-                        for m_idx, model_name in enumerate(selected_models):
+                        # Create question card
+                        question_text_escaped = html.escape(question.get('question', 'N/A'))
+                        topic = question.get('topic', 'Unknown')
+                        correct_answer = question.get('correct_answer', '?')
+
+                        question_card_html = f"""
+                        <div class='eval-question-card'>
+                            <div class='eval-question-header'>
+                                <div class='eval-question-text'>{q_idx + 1}. {question_text_escaped}</div>
+                                <div class='eval-question-meta'>
+                                    <span class='correct-answer-badge'>Answer: {correct_answer}</span>
+                                    <span class='eval-topic-badge'>{topic}</span>
+                                </div>
+                            </div>
+                            <div class='model-responses' id='q{q_idx}_responses'></div>
+                        </div>
+                        """
+
+                        # Display question card
+                        question_containers[q_idx] = st.empty()
+                        question_containers[q_idx].markdown(question_card_html, unsafe_allow_html=True)
+
+                        # Evaluate with each model
+                        model_results_html = []
+                        for model_name in selected_models:
                             current_eval += 1
 
                             status_container.markdown(
@@ -1256,9 +1412,27 @@ def main():
                             result = evaluate_question(client, question, model_name)
                             all_results.append(result)
 
-                            # Show result
+                            # Build model response HTML
                             emoji = "✅" if result['correct'] else "❌"
-                            st.write(f"{emoji} {model_name} → Selected: {result['selected']}")
+                            response_class = "model-response-correct" if result['correct'] else "model-response-incorrect"
+                            model_results_html.append(
+                                f"<span class='model-response-item {response_class}'>{emoji} {model_name} → {result['selected']}</span>"
+                            )
+
+                            # Update question card with all results so far
+                            updated_card_html = f"""
+                            <div class='eval-question-card'>
+                                <div class='eval-question-header'>
+                                    <div class='eval-question-text'>{q_idx + 1}. {question_text_escaped}</div>
+                                    <div class='eval-question-meta'>
+                                        <span class='correct-answer-badge'>Answer: {correct_answer}</span>
+                                        <span class='eval-topic-badge'>{topic}</span>
+                                    </div>
+                                </div>
+                                <div class='model-responses'>{"".join(model_results_html)}</div>
+                            </div>
+                            """
+                            question_containers[q_idx].markdown(updated_card_html, unsafe_allow_html=True)
 
                             progress_bar.progress(current_eval / total_evaluations)
 
@@ -1266,13 +1440,27 @@ def main():
                     save_results(all_results)
 
                     status_container.markdown("<div class='status-success'>✅ Evaluation complete!</div>", unsafe_allow_html=True)
+                    time.sleep(1)
                     status_container.empty()
                     progress_bar.empty()
                     st.rerun()
 
             # Display results
             st.markdown("---")
-            st.markdown("### 🏆 Results")
+
+            # Header with Clear Results button
+            col_header, col_clear = st.columns([4, 1])
+            with col_header:
+                st.markdown("### 🏆 Results")
+            with col_clear:
+                st.markdown('<div class="clear-results-button">', unsafe_allow_html=True)
+                if st.button("🗑️ Clear Results", use_container_width=True, key="clear_results_btn"):
+                    # Clear the results file
+                    if os.path.exists(RESULTS_FILE):
+                        os.remove(RESULTS_FILE)
+                        st.toast("Results cleared successfully", icon="🗑️")
+                        st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
 
             results = load_results()
 
@@ -1318,6 +1506,235 @@ def main():
                 results_data = [{k: row[k] for k in ['Rank', 'Model', 'Correct', 'Total', 'Accuracy']} for row in results_data]
 
                 st.table(results_data)
+
+                # Per-Question Breakdown
+                st.markdown("---")
+                st.markdown("### 📋 Per-Question Breakdown")
+
+                with st.expander("View detailed results for each question", expanded=False):
+                    # Group results by question_id
+                    question_results = {}
+                    for result in results:
+                        q_id = result['question_id']
+                        if q_id not in question_results:
+                            question_results[q_id] = []
+                        question_results[q_id].append(result)
+
+                    # Get all questions
+                    questions_dict = {q['id']: q for q in all_questions}
+
+                    # Display each question with results
+                    for q_id, q_results in sorted(question_results.items()):
+                        question = questions_dict.get(q_id)
+                        if not question:
+                            continue
+
+                        # Calculate difficulty (% of models that got it right)
+                        total_attempts = len(q_results)
+                        correct_count = sum(1 for r in q_results if r['correct'])
+                        accuracy_pct = (correct_count / total_attempts * 100) if total_attempts > 0 else 0
+
+                        # Determine difficulty badge
+                        if accuracy_pct >= 70:
+                            difficulty_class = "difficulty-easy"
+                            difficulty_label = "EASY"
+                        elif accuracy_pct >= 40:
+                            difficulty_class = "difficulty-medium"
+                            difficulty_label = "MEDIUM"
+                        else:
+                            difficulty_class = "difficulty-hard"
+                            difficulty_label = "HARD"
+
+                        # Build model responses HTML
+                        responses_html = []
+                        for r in q_results:
+                            emoji = "✅" if r['correct'] else "❌"
+                            response_class = "model-response-correct" if r['correct'] else "model-response-incorrect"
+                            responses_html.append(
+                                f"<span class='model-response-item {response_class}'>{emoji} {r['model']} → {r['selected']}</span>"
+                            )
+
+                        # Question card
+                        question_text_escaped = html.escape(question.get('question', 'N/A'))
+                        topic = question.get('topic', 'Unknown')
+                        correct_answer = question.get('correct_answer', '?')
+
+                        card_html = f"""
+                        <div class='eval-question-card'>
+                            <div class='eval-question-header'>
+                                <div class='eval-question-text'>Q{q_id}. {question_text_escaped}</div>
+                                <div class='eval-question-meta'>
+                                    <span class='correct-answer-badge'>Answer: {correct_answer}</span>
+                                    <span class='eval-topic-badge'>{topic}</span>
+                                    <span class='difficulty-badge {difficulty_class}'>{difficulty_label} ({accuracy_pct:.0f}%)</span>
+                                </div>
+                            </div>
+                            <div class='model-responses'>{"".join(responses_html)}</div>
+                        </div>
+                        """
+
+                        st.markdown(card_html, unsafe_allow_html=True)
+
+                # Hardest Questions Section
+                st.markdown("---")
+                st.markdown("### 🔥 Hardest Questions")
+
+                # Calculate difficulty for each question
+                question_difficulty = []
+                for q_id, q_results in question_results.items():
+                    question = questions_dict.get(q_id)
+                    if not question:
+                        continue
+
+                    total_attempts = len(q_results)
+                    correct_count = sum(1 for r in q_results if r['correct'])
+                    accuracy_pct = (correct_count / total_attempts * 100) if total_attempts > 0 else 0
+
+                    question_difficulty.append({
+                        'id': q_id,
+                        'question': question,
+                        'accuracy': accuracy_pct,
+                        'results': q_results
+                    })
+
+                # Sort by accuracy (lowest first) and take top 5
+                hardest_questions = sorted(question_difficulty, key=lambda x: x['accuracy'])[:5]
+
+                if hardest_questions:
+                    st.markdown("<div class='status-info'>Questions with the lowest model accuracy</div>", unsafe_allow_html=True)
+
+                    for item in hardest_questions:
+                        q_id = item['id']
+                        question = item['question']
+                        accuracy_pct = item['accuracy']
+                        q_results = item['results']
+
+                        # Determine difficulty badge
+                        if accuracy_pct >= 70:
+                            difficulty_class = "difficulty-easy"
+                            difficulty_label = "EASY"
+                        elif accuracy_pct >= 40:
+                            difficulty_class = "difficulty-medium"
+                            difficulty_label = "MEDIUM"
+                        else:
+                            difficulty_class = "difficulty-hard"
+                            difficulty_label = "HARD"
+
+                        # Build model responses HTML
+                        responses_html = []
+                        for r in q_results:
+                            emoji = "✅" if r['correct'] else "❌"
+                            response_class = "model-response-correct" if r['correct'] else "model-response-incorrect"
+                            responses_html.append(
+                                f"<span class='model-response-item {response_class}'>{emoji} {r['model']} → {r['selected']}</span>"
+                            )
+
+                        # Question card
+                        question_text_escaped = html.escape(question.get('question', 'N/A'))
+                        topic = question.get('topic', 'Unknown')
+                        correct_answer = question.get('correct_answer', '?')
+
+                        card_html = f"""
+                        <div class='eval-question-card'>
+                            <div class='eval-question-header'>
+                                <div class='eval-question-text'>Q{q_id}. {question_text_escaped}</div>
+                                <div class='eval-question-meta'>
+                                    <span class='correct-answer-badge'>Answer: {correct_answer}</span>
+                                    <span class='eval-topic-badge'>{topic}</span>
+                                    <span class='difficulty-badge {difficulty_class}'>{difficulty_label} ({accuracy_pct:.0f}%)</span>
+                                </div>
+                            </div>
+                            <div class='model-responses'>{"".join(responses_html)}</div>
+                        </div>
+                        """
+
+                        st.markdown(card_html, unsafe_allow_html=True)
+                else:
+                    st.markdown("<div class='status-info'>No questions to display</div>", unsafe_allow_html=True)
+
+                # Model Agreement Statistics
+                st.markdown("---")
+                st.markdown("### 🤝 Model Agreement Statistics")
+
+                # Calculate consensus for each question
+                total_questions = len(question_results)
+                full_consensus_count = 0
+                majority_consensus_count = 0
+
+                for q_id, q_results in question_results.items():
+                    # Get all selected answers
+                    selected_answers = [r['selected'] for r in q_results]
+                    unique_answers = set(selected_answers)
+
+                    # Full consensus: all models chose the same answer
+                    if len(unique_answers) == 1:
+                        full_consensus_count += 1
+
+                    # Majority consensus: >50% chose the same answer
+                    if selected_answers:
+                        most_common_count = max(selected_answers.count(ans) for ans in unique_answers)
+                        if most_common_count > len(selected_answers) / 2:
+                            majority_consensus_count += 1
+
+                # Calculate percentages
+                full_consensus_pct = (full_consensus_count / total_questions * 100) if total_questions > 0 else 0
+                majority_consensus_pct = (majority_consensus_count / total_questions * 100) if total_questions > 0 else 0
+
+                # Display statistics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.markdown(f"""
+                    <div style='background: rgba(0, 217, 255, 0.15); border: 1px solid rgba(0, 217, 255, 0.3);
+                         border-radius: 12px; padding: 1.5rem; text-align: center;'>
+                        <div style='font-size: 0.85rem; color: #00D9FF; font-weight: 600; margin-bottom: 0.5rem;'>
+                            TOTAL QUESTIONS
+                        </div>
+                        <div style='font-size: 2.5rem; font-weight: 700; color: #FFFFFF;'>
+                            {total_questions}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                with col2:
+                    st.markdown(f"""
+                    <div style='background: rgba(0, 217, 100, 0.15); border: 1px solid rgba(0, 217, 100, 0.3);
+                         border-radius: 12px; padding: 1.5rem; text-align: center;'>
+                        <div style='font-size: 0.85rem; color: #00D964; font-weight: 600; margin-bottom: 0.5rem;'>
+                            FULL CONSENSUS
+                        </div>
+                        <div style='font-size: 2.5rem; font-weight: 700; color: #FFFFFF;'>
+                            {full_consensus_pct:.0f}%
+                        </div>
+                        <div style='font-size: 0.75rem; color: #888; margin-top: 0.5rem;'>
+                            {full_consensus_count} questions
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                with col3:
+                    st.markdown(f"""
+                    <div style='background: rgba(255, 200, 0, 0.15); border: 1px solid rgba(255, 200, 0, 0.3);
+                         border-radius: 12px; padding: 1.5rem; text-align: center;'>
+                        <div style='font-size: 0.85rem; color: #FFC800; font-weight: 600; margin-bottom: 0.5rem;'>
+                            MAJORITY CONSENSUS
+                        </div>
+                        <div style='font-size: 2.5rem; font-weight: 700; color: #FFFFFF;'>
+                            {majority_consensus_pct:.0f}%
+                        </div>
+                        <div style='font-size: 0.75rem; color: #888; margin-top: 0.5rem;'>
+                            {majority_consensus_count} questions
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("""
+                <div class='status-info' style='font-size: 0.9rem;'>
+                    <strong>Full Consensus:</strong> All models selected the same answer<br>
+                    <strong>Majority Consensus:</strong> More than 50% of models agreed on the same answer
+                </div>
+                """, unsafe_allow_html=True)
 
                 # Download button
                 if st.button("📥 Download Results", use_container_width=True):
