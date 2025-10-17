@@ -34,8 +34,8 @@ MODELS = {
     "Sonnet 4.5": "anthropic/claude-sonnet-4.5",
     "Opus 4.1": "anthropic/claude-opus-4.1",
     "Haiku 4.5": "anthropic/claude-haiku-4.5",
-    "GPT 4.5 Thinking": "openai/gpt-4.5-thinking",
-    "GPT 4.5": "openai/gpt-4.5",
+    "GPT 5": "openai/gpt-5",
+    "GPT 5 Mini": "openai/gpt-5-mini",
     "GPT 4.1": "openai/gpt-4.1",
     "GPT 4o Mini": "openai/gpt-4o-mini",
     "Gemini 2.5 Pro": "google/gemini-2.5-pro",
@@ -745,8 +745,7 @@ def evaluate_question(client, question_data, model_name):
         response = client.chat.completions.create(
             model=MODELS[model_name],
             messages=[{"role": "user", "content": prompt}],
-            temperature=0,
-            max_tokens=10
+            temperature=0
         )
 
         answer = response.choices[0].message.content.strip().upper()
@@ -1239,7 +1238,7 @@ def main():
                     progress_bar = st.progress(0)
                     status_container = st.empty()
 
-                    all_results = load_results()
+                    all_results = []
 
                     total_evaluations = len(questions) * len(selected_models)
                     current_eval = 0

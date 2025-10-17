@@ -60,13 +60,18 @@ Respond only with valid JSON, no additional text."""
     return base_requirements
 
 
-EVALUATION_PROMPT_TEMPLATE = """Answer this multiple choice question. Respond with ONLY the letter (A, B, C, or D) of your answer, nothing else.
+EVALUATION_PROMPT_TEMPLATE = """Answer this multiple choice question.
+
+CRITICAL INSTRUCTION: You MUST respond with EXACTLY ONE LETTER: A, B, C, or D. Nothing else.
 
 Question: {question}
 
 {options}
 
-Your answer (A, B, C, or D only):"""
+Example CORRECT response: C
+Example INCORRECT response: The answer is C because...
+
+Your answer (single letter only):"""
 
 
 REFERENCE_EXTRACTION_PROMPT = """You are an expert at analyzing and extracting multiple-choice questions from unstructured text.

@@ -4,757 +4,279 @@
     "model": "Sonnet 4.5",
     "selected": "B",
     "correct": false,
-    "timestamp": "2025-10-16T03:21:24.641988"
+    "timestamp": "2025-10-17T01:22:00.153695"
   },
   {
     "question_id": 1,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:25.922635"
+    "timestamp": "2025-10-17T01:22:57.492865"
+  },
+  {
+    "question_id": 1,
+    "model": "Gemini 2.5 Pro",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:23:35.006110"
+  },
+  {
+    "question_id": 1,
+    "model": "Gemini 2.5 Flash",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:23:35.507825"
   },
   {
     "question_id": 2,
     "model": "Sonnet 4.5",
     "selected": "B",
     "correct": false,
-    "timestamp": "2025-10-16T03:21:27.158414"
+    "timestamp": "2025-10-17T01:23:36.764848"
   },
   {
     "question_id": 2,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:27.633136"
+    "timestamp": "2025-10-17T01:24:36.276605"
+  },
+  {
+    "question_id": 2,
+    "model": "Gemini 2.5 Pro",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:25:22.213710"
+  },
+  {
+    "question_id": 2,
+    "model": "Gemini 2.5 Flash",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:25:22.824846"
   },
   {
     "question_id": 3,
     "model": "Sonnet 4.5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:29.060205"
+    "timestamp": "2025-10-17T01:25:24.274509"
   },
   {
     "question_id": 3,
-    "model": "Haiku 4.5",
-    "selected": "B",
+    "model": "GPT 5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:25:37.202580"
+  },
+  {
+    "question_id": 3,
+    "model": "Gemini 2.5 Pro",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:26:00.375946"
+  },
+  {
+    "question_id": 3,
+    "model": "Gemini 2.5 Flash",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:26:01.019501"
+  },
+  {
+    "question_id": 4,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:26:02.353792"
+  },
+  {
+    "question_id": 4,
+    "model": "GPT 5",
+    "selected": "A",
     "correct": false,
-    "timestamp": "2025-10-16T03:21:29.533990"
+    "timestamp": "2025-10-17T01:26:37.535393"
   },
   {
     "question_id": 4,
-    "model": "Sonnet 4.5",
+    "model": "Gemini 2.5 Pro",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:30.928545"
+    "timestamp": "2025-10-17T01:26:55.378252"
   },
   {
     "question_id": 4,
-    "model": "Haiku 4.5",
+    "model": "Gemini 2.5 Flash",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:31.428113"
+    "timestamp": "2025-10-17T01:26:56.286278"
   },
   {
     "question_id": 5,
     "model": "Sonnet 4.5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T03:21:32.581126"
+    "timestamp": "2025-10-17T01:26:57.622051"
   },
   {
     "question_id": 5,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:27:22.428715"
+  },
+  {
+    "question_id": 5,
+    "model": "Gemini 2.5 Pro",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:27:47.519002"
+  },
+  {
+    "question_id": 5,
+    "model": "Gemini 2.5 Flash",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:27:48.134552"
+  },
+  {
+    "question_id": 6,
+    "model": "Sonnet 4.5",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-17T01:27:49.437084"
+  },
+  {
+    "question_id": 6,
+    "model": "GPT 5",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-17T01:27:57.480487"
+  },
+  {
+    "question_id": 6,
+    "model": "Gemini 2.5 Pro",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-17T01:28:10.247213"
+  },
+  {
+    "question_id": 6,
+    "model": "Gemini 2.5 Flash",
+    "selected": "B",
+    "correct": true,
+    "timestamp": "2025-10-17T01:28:10.808202"
+  },
+  {
+    "question_id": 7,
+    "model": "Sonnet 4.5",
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:28:12.244248"
+  },
+  {
+    "question_id": 7,
+    "model": "GPT 5",
     "selected": "D",
     "correct": false,
-    "timestamp": "2025-10-16T03:21:33.055497"
-  },
-  {
-    "question_id": 6,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T03:21:34.370469"
-  },
-  {
-    "question_id": 6,
-    "model": "Haiku 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T03:21:34.903148"
-  },
-  {
-    "question_id": 7,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T03:21:36.172193"
-  },
-  {
-    "question_id": 7,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T03:21:36.978595"
-  },
-  {
-    "question_id": 1,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:20.835358"
-  },
-  {
-    "question_id": 1,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:21.469203"
-  },
-  {
-    "question_id": 1,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:21.579258",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 1,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:21.882892",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 1,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:22.007008",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 2,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:23.267604"
-  },
-  {
-    "question_id": 2,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:23.811420"
-  },
-  {
-    "question_id": 2,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:23.957296",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 2,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:24.069341",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 2,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:24.227025",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 3,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:25.763742"
-  },
-  {
-    "question_id": 3,
-    "model": "Haiku 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:27.330778"
-  },
-  {
-    "question_id": 3,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:27.482208",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 3,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:27.613456",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 3,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:27.738960",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 4,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:29.103159"
-  },
-  {
-    "question_id": 4,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:29.942265"
-  },
-  {
-    "question_id": 4,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:30.100397",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 4,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:30.480745",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 4,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:30.614846",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 5,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:32.059797"
-  },
-  {
-    "question_id": 5,
-    "model": "Haiku 4.5",
-    "selected": "D",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:32.773437"
-  },
-  {
-    "question_id": 5,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:32.893514",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 5,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:33.026275",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 5,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:33.208928",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 6,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:34.543781"
-  },
-  {
-    "question_id": 6,
-    "model": "Haiku 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:35.178601"
-  },
-  {
-    "question_id": 6,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:35.299031",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 6,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:35.439597",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 6,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:35.561473",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 7,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:37.034513"
-  },
-  {
-    "question_id": 7,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:37.589908"
-  },
-  {
-    "question_id": 7,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:37.707397",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 7,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:37.831386",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 7,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:38.013434",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 8,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:39.544755"
-  },
-  {
-    "question_id": 8,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:40.038586"
-  },
-  {
-    "question_id": 8,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:40.201300",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 8,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:40.342092",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 8,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:40.467743",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 9,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:41.929291"
-  },
-  {
-    "question_id": 9,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:42.824067"
-  },
-  {
-    "question_id": 9,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:42.938704",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 9,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:43.060213",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 9,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:43.181828",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 10,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:44.412055"
-  },
-  {
-    "question_id": 10,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:15:45.434300"
-  },
-  {
-    "question_id": 10,
-    "model": "GPT 4.5 Thinking",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:45.565258",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5-thinking is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 10,
-    "model": "GPT 4.5",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:45.943071",
-    "error": "Error code: 400 - {'error': {'message': 'openai/gpt-4.5 is not a valid model ID', 'code': 400}, 'user_id': 'user_2xsO4sTPpfDQ749H8YWAlUR3CrV'}"
-  },
-  {
-    "question_id": 10,
-    "model": "GPT 4.1",
-    "selected": "ERROR",
-    "correct": false,
-    "timestamp": "2025-10-16T16:15:46.070388",
-    "error": "Error code: 404 - {'error': {'message': 'No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}"
-  },
-  {
-    "question_id": 1,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:04.117922"
-  },
-  {
-    "question_id": 1,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:05.035281"
-  },
-  {
-    "question_id": 1,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:06.825596"
-  },
-  {
-    "question_id": 1,
-    "model": "Gemini 2.5 Flash",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:07.451453"
-  },
-  {
-    "question_id": 2,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:08.773089"
-  },
-  {
-    "question_id": 2,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:09.906946"
-  },
-  {
-    "question_id": 2,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:11.407633"
-  },
-  {
-    "question_id": 2,
-    "model": "Gemini 2.5 Flash",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:11.954378"
-  },
-  {
-    "question_id": 3,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:13.050078"
-  },
-  {
-    "question_id": 3,
-    "model": "Haiku 4.5",
-    "selected": "B",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:13.639168"
-  },
-  {
-    "question_id": 3,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:15.129321"
-  },
-  {
-    "question_id": 3,
-    "model": "Gemini 2.5 Flash",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:15.638760"
-  },
-  {
-    "question_id": 4,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:17.074973"
-  },
-  {
-    "question_id": 4,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:17.603226"
-  },
-  {
-    "question_id": 4,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:19.103324"
-  },
-  {
-    "question_id": 4,
-    "model": "Gemini 2.5 Flash",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:19.740284"
-  },
-  {
-    "question_id": 5,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:21.583192"
-  },
-  {
-    "question_id": 5,
-    "model": "Haiku 4.5",
-    "selected": "D",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:22.705121"
-  },
-  {
-    "question_id": 5,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:24.455019"
-  },
-  {
-    "question_id": 5,
-    "model": "Gemini 2.5 Flash",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:24.976458"
-  },
-  {
-    "question_id": 6,
-    "model": "Sonnet 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:26.187463"
-  },
-  {
-    "question_id": 6,
-    "model": "Haiku 4.5",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:27.072789"
-  },
-  {
-    "question_id": 6,
-    "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:28.402557"
-  },
-  {
-    "question_id": 6,
-    "model": "Gemini 2.5 Flash",
-    "selected": "B",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:28.899708"
-  },
-  {
-    "question_id": 7,
-    "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:30.297150"
-  },
-  {
-    "question_id": 7,
-    "model": "Haiku 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:31.533925"
+    "timestamp": "2025-10-17T01:28:55.845070"
   },
   {
     "question_id": 7,
     "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:33.253545"
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:29:10.296275"
   },
   {
     "question_id": 7,
     "model": "Gemini 2.5 Flash",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:33.706833"
+    "timestamp": "2025-10-17T01:29:10.767147"
   },
   {
     "question_id": 8,
     "model": "Sonnet 4.5",
-    "selected": "C",
-    "correct": true,
-    "timestamp": "2025-10-16T16:16:35.096467"
+    "selected": "B",
+    "correct": false,
+    "timestamp": "2025-10-17T01:29:12.066275"
   },
   {
     "question_id": 8,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:35.683938"
+    "timestamp": "2025-10-17T01:29:44.922993"
   },
   {
     "question_id": 8,
     "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:37.144978"
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:30:08.835474"
   },
   {
     "question_id": 8,
     "model": "Gemini 2.5 Flash",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:37.595969"
+    "timestamp": "2025-10-17T01:30:09.298447"
   },
   {
     "question_id": 9,
     "model": "Sonnet 4.5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:38.914643"
+    "timestamp": "2025-10-17T01:30:11.183215"
   },
   {
     "question_id": 9,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:40.320650"
+    "timestamp": "2025-10-17T01:30:26.717579"
   },
   {
     "question_id": 9,
     "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:41.980736"
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:30:52.677956"
   },
   {
     "question_id": 9,
     "model": "Gemini 2.5 Flash",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:42.600339"
+    "timestamp": "2025-10-17T01:30:53.235297"
   },
   {
     "question_id": 10,
     "model": "Sonnet 4.5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:44.020512"
+    "timestamp": "2025-10-17T01:30:54.558565"
   },
   {
     "question_id": 10,
-    "model": "Haiku 4.5",
+    "model": "GPT 5",
     "selected": "C",
     "correct": true,
-    "timestamp": "2025-10-16T16:16:44.585213"
+    "timestamp": "2025-10-17T01:31:30.290467"
   },
   {
     "question_id": 10,
     "model": "Gemini 2.5 Pro",
-    "selected": "?",
-    "correct": false,
-    "timestamp": "2025-10-16T16:16:46.360562"
+    "selected": "C",
+    "correct": true,
+    "timestamp": "2025-10-17T01:31:50.203415"
   },
   {
     "question_id": 10,
     "model": "Gemini 2.5 Flash",
     "selected": "B",
     "correct": false,
-    "timestamp": "2025-10-16T16:16:46.976438"
+    "timestamp": "2025-10-17T01:31:50.932314"
   }
 ]
