@@ -1,13 +1,11 @@
 # 🎭 Hallucinator
 
-A visually impressive Streamlit app for generating and evaluating legal multiple-choice questions using OpenRouter API.
+A Streamlit app for generating and evaluating legal multiple-choice questions using OpenRouter API.
 
 ## Features
 
 - **Question Generation**: Generate high-quality legal MCQs with streaming text output
 - **Model Evaluation**: Test multiple LLM models on your question bank
-- **Dark Mode**: Beautiful gradient-based dark theme
-- **Real-time Streaming**: Watch questions being generated in real-time
 - **JSON Storage**: Simple file-based storage for questions and results
 
 ## Setup
@@ -84,7 +82,3 @@ hallucinator/
 - Evaluation results are stored in `eval_results.json`
 - The app uses OpenRouter's API - ensure you have credits
 - Model IDs in code may need verification against OpenRouter's actual model names
-
----
-
-Built with Claude Code
